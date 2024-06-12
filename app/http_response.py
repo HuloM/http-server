@@ -21,4 +21,5 @@ class HttpResponse:
                                                                             status_code=self.status_code.value,
                                                                             headers=self.headers.construct_headers(),
                                                                             body=self.body)
+        print(res)
         return res.encode()
