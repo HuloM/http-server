@@ -10,9 +10,10 @@ def main():
         conn, addr = server_socket.accept()  # wait for client
         buff = conn.recv(1024).decode("utf-8")
 
-        split = buff.split(" ")
-        req_path = split[1]
+        split = buff.split("\r\n")
+
         print(split)
+        req_path = '/'
         if req_path == "/":
             conn.send(HttpResponse('HTTP/1.1', HttpStatusCode.OK, '\r\n', HttpHeaders({})).construct_response())
         elif req_path.startswith("/echo"):
