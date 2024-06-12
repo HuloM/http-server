@@ -34,6 +34,16 @@ def request_handler(conn):
         conn.send(HttpResponse('HTTP/1.1', HttpStatusCode.OK, '{body}'.format(body=user_agent),
                                HttpHeaders({'content_type': 'text/plain', 'content_length': len(user_agent)}))
                   .construct_response())
+    elif req_path.startswith("/files"):
+        file_path = req_path[1:].split("/")[1]
+        try:
+            with open(file_path, 'r') as file:
+                file_content = file.read()
+                conn.send(HttpResponse('HTTP/1.1', HttpStatusCode.OK, '{body}'.format(body=file_content),
+                                       HttpHeaders({'content_type': 'application/octet-stream', 'content_length': len(file_content)}))
+                          .construct_response())
+        except FileNotFoundError:
+            conn.send(b"HTTP/1.1 404 Not Found\r\n\r\n")
     else:
         conn.send(b"HTTP/1.1 404 Not Found\r\n\r\n")
 
