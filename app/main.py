@@ -27,7 +27,7 @@ def main():
             user_agent = [s for s in split if "User-Agent" in s]
             print(user_agent)
             conn.send(HttpResponse('HTTP/1.1', HttpStatusCode.OK, '{body}'.format(body=user_agent),
-                                   HttpHeaders({'content_type': 'text/plain', 'content_length': len(req_body)}))
+                                   HttpHeaders({'content_type': 'text/plain', 'content_length': len(user_agent)}))
                       .construct_response())
         else:
             conn.send(b"HTTP/1.1 404 Not Found\r\n\r\n")
