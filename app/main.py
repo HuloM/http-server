@@ -18,20 +18,19 @@ def request_handler(conn):
 
     split = buff.split("\r\n")
 
-    print(split)
     req_path = split[0].split(" ")[1]
-    print(req_path)
+
     if req_path == "/":
         conn.send(HttpResponse('HTTP/1.1', HttpStatusCode.OK, '\r\n', HttpHeaders({})).construct_response())
     elif req_path.startswith("/echo"):
         req_body = req_path[1:].split("/")[1]
-        print(req_body)
+
         conn.send(HttpResponse('HTTP/1.1', HttpStatusCode.OK, '{body}'.format(body=req_body),
                                HttpHeaders({'content_type': 'text/plain', 'content_length': len(req_body)}))
                   .construct_response())
     elif req_path == "/user-agent":
         user_agent = [s for s in split if "User-Agent" in s][0].split(" ")[1]
-        print(user_agent)
+
         conn.send(HttpResponse('HTTP/1.1', HttpStatusCode.OK, '{body}'.format(body=user_agent),
                                HttpHeaders({'content_type': 'text/plain', 'content_length': len(user_agent)}))
                   .construct_response())
