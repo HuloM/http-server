@@ -13,7 +13,7 @@ def main():
         req_path = buff.split(" ")[1]
 
         if req_path == "/":
-            conn.send(HttpResponse(b'HTTP/1.1', HttpStatusCode.OK, b'\r\n', None).construct_response())
+            conn.send(HttpResponse(b'HTTP/1.1', HttpStatusCode.OK, b'\r\n', HttpHeaders()).construct_response())
         elif req_path.startswith("/echo"):
             req_body = req_path[1:].split("/")[1]
             print(req_body)
