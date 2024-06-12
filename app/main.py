@@ -17,7 +17,7 @@ def main():
         elif req_path.startswith("/echo"):
             req_body = req_path[1:].split("/")[1]
             print(req_body)
-            conn.send(HttpResponse(b'HTTP/1.1', HttpStatusCode.OK, '{body}'.format(body=req_body).encode(),
+            conn.send(HttpResponse('HTTP/1.1', HttpStatusCode.OK, '{body}'.format(body=req_body),
                                    HttpHeaders({'content_type': 'text/plain', 'content_length': len(req_body)}))
                       .construct_response())
         else:

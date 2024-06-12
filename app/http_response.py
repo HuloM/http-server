@@ -5,12 +5,12 @@ from app.http_headers import HttpHeaders
 
 @dataclass
 class HttpResponse:
-    http_version: bytes
+    http_version: str
     status_code: HttpStatusCode
-    body: bytes
+    body: str
     headers: HttpHeaders
 
-    def __init__(self, http_version: bytes, status_code: HttpStatusCode, body: bytes, headers: HttpHeaders):
+    def __init__(self, http_version: str, status_code: HttpStatusCode, body: str, headers: HttpHeaders):
         self.http_version = http_version
         self.status_code = status_code
         self.body = body

@@ -23,8 +23,8 @@ class HttpHeaders:
         byte_str = ''
         for k, v in self.headers.items():
             if v is not None:
-                byte_str += f'{k}: {v}\r\n'
-        return byte_str.encode()
+                byte_str += f'{HttpHeaderObject(k)}: {v}\r\n'
+        return byte_str
 
 
 class HttpHeaderObject(Enum):
