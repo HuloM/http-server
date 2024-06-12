@@ -3,6 +3,7 @@ from app.http_response import HttpResponse
 from app.http_status_code import HttpStatusCode
 from app.http_headers import HttpHeaders
 import threading
+import sys
 
 
 def main():
@@ -35,9 +36,10 @@ def request_handler(conn):
                                HttpHeaders({'content_type': 'text/plain', 'content_length': len(user_agent)}))
                   .construct_response())
     elif req_path.startswith("/files"):
+        dir = sys.argv[2]
         file_path = req_path[1:].split("/")[1]
         try:
-            with open(file_path, 'r') as file:
+            with open(f"/{dir}/{file_path}", 'r') as file:
                 file_content = file.read()
                 conn.send(HttpResponse('HTTP/1.1', HttpStatusCode.OK, '{body}'.format(body=file_content),
                                        HttpHeaders({'content_type': 'application/octet-stream', 'content_length': len(file_content)}))
