@@ -17,7 +17,7 @@ class HttpResponse:
         self.headers = headers
 
     def construct_response(self) -> bytes:
-        return '{http_version} {status_code}\r\n{headers}\r\n{body}'.format(http_version=self.http_version.decode('utf-8'),
+        return '{http_version} {status_code}\r\n{headers}\r\n{body}'.format(http_version=self.http_version,
                                                                             status_code=self.status_code.value,
                                                                             headers=self.headers.construct_headers(),
                                                                             body=self.body).encode()
