@@ -11,7 +11,7 @@ def main():
         buff = conn.recv(1024).decode("utf-8")
 
         req_path = buff.split(" ")[1]
-        print(req_path)
+        print(buff)
         if req_path == "/":
             conn.send(HttpResponse('HTTP/1.1', HttpStatusCode.OK, '\r\n', HttpHeaders({})).construct_response())
         elif req_path.startswith("/echo"):
