@@ -20,11 +20,11 @@ class HttpHeaders:
         self.headers = headers
 
     def construct_headers(self):
-        byte_str = b''
+        byte_str = ''
         for k, v in self.headers.items():
             if v is not None:
                 byte_str += f'{k}: {v}\r\n'
-        return byte_str
+        return byte_str.encode()
 
 
 class HttpHeaderObject(Enum):
