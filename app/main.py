@@ -8,7 +8,8 @@ def main():
         buff = conn.recv(1024).decode("utf-8")
 
         print(buff)
-
+        split = buff.split(" ")
+        print(split)
         conn.send(b"HTTP/1.1 200 OK\r\n\r\n")
         # conn.close()
 
