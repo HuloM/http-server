@@ -6,7 +6,7 @@ def main():
     while True:
         conn, addr = server_socket.accept() # wait for client
         conn.send(b"HTTP/1.1 200 OK\r\n\r\n")
-        conn.close()
+        # conn.close()
 
 
 if __name__ == "__main__":
